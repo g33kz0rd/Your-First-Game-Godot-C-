@@ -40,5 +40,17 @@ public class Player : Area2D
         tempPosition.x = Mathf.Clamp(tempPosition.x, 0, _screensize.x);
         tempPosition.y = Mathf.Clamp(tempPosition.y, 0, _screensize.y);
         Position = tempPosition;
+
+        if (velocity.x != 0)
+        {
+            _animatedSprite.Animation = "right";
+            _animatedSprite.FlipV = false;
+            _animatedSprite.FlipH = velocity.x < 0;
+        }
+        else if (velocity.y != 0)
+        {
+            _animatedSprite.Animation = "up";
+            _animatedSprite.FlipV = velocity.y > 0;
+        }
     }
 }
