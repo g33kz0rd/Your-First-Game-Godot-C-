@@ -1,7 +1,12 @@
 using Godot;
 
+
 public class Player : Area2D
 {
+    [Signal]
+    public delegate void Hit();
+
+    [Export]
     private int _speed = 400;
     private Vector2 _screensize;
     private AnimatedSprite _animatedSprite;
@@ -10,6 +15,8 @@ public class Player : Area2D
     {
         _screensize = GetViewportRect().Size;
         _animatedSprite = GetNode("AnimatedSprite") as AnimatedSprite;
+
+        Hide();
     }
 
     public override void _Process(float delta)
