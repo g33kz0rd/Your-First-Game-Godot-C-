@@ -10,13 +10,22 @@ public class Player : Area2D
     private int _speed = 400;
     private Vector2 _screensize;
     private AnimatedSprite _animatedSprite;
+    private CollisionShape2D _collisionShape2D;
 
     public override void _Ready()
     {
         _screensize = GetViewportRect().Size;
         _animatedSprite = GetNode("AnimatedSprite") as AnimatedSprite;
+        _collisionShape2D = GetNode("CollisionShape2D") as CollisionShape2D;
 
         Hide();
+    }
+
+    public void Start(Vector2 pos)
+    {
+        Position = pos;
+        Show();
+        _collisionShape2D.Disabled = false;
     }
 
     public override void _Process(float delta)
@@ -59,5 +68,12 @@ public class Player : Area2D
             _animatedSprite.Animation = "up";
             _animatedSprite.FlipV = velocity.y > 0;
         }
+    }
+
+    private void OnPlayerBodyEntered(Object body)
+    {
+        Hide();
+        EmitSignal("hit");
+        _collisionShape2D.Disabled = true;
     }
 }

@@ -52,4 +52,6 @@ _sections_unfolded = [ "Transform" ]
 
 shape = SubResource( 2 )
 
+[connection signal="body_entered" from="." to="." method="OnPlayerBodyEntered"]
+
 
