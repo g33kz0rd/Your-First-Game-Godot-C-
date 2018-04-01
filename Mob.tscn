@@ -33,7 +33,7 @@ custom_solver_bias = 0.0
 radius = 42.1079
 height = 27.7414
 
-[node name="Mob" type="RigidBody2D" index="0"]
+[node name="Mob" type="RigidBody2D"]
 
 position = Vector2( 265.336, 130.863 )
 scale = Vector2( 0.75, 0.75 )
