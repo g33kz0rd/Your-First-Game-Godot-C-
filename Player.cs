@@ -1,5 +1,5 @@
 using Godot;
-
+using System;
 
 public class Player : Area2D
 {
@@ -69,7 +69,7 @@ public class Player : Area2D
         }
     }
 
-    private void OnPlayerBodyEntered(Object body)
+    private void OnPlayerBodyEntered(Godot.Object body)
     {
         Hide();
         EmitSignal(nameof(Hit));

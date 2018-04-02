@@ -27,8 +27,6 @@ public class Mob : RigidBody2D
         _animatedSprite.Play();
 
         _collisionShape2D = GetNode("CollisionShape2D") as CollisionShape2D;
-
-        //Hide();
     }
 
     public void Start(Vector2 pos)

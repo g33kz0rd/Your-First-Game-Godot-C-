@@ -16,6 +16,8 @@ public class Main : Node
 
     private int _score;
 
+    private Hud _hud;
+
     public override void _Ready()
     {
         _startTimer = GetNode("StartTimer") as Timer;
@@ -24,9 +26,10 @@ public class Main : Node
         _player = GetNode("Player") as Player;
         _startPosition = GetNode("StartPosition") as Position2D;
         _mobSpawnLocation = GetNode("MobPath/MobSpawnLocation") as PathFollow2D;
+        _hud = GetNode("Hud") as Hud;
     }
 
-    private void OnPlayerHit()
+    private void OnPlayerHit() 
     {
         GameOver();
     }
@@ -35,11 +38,13 @@ public class Main : Node
     {
         _scoreTimer.Stop();
         _mobTimer.Stop();
+        _hud.ShowGameOver();
     }
 
     private void NewGame()
     {
-        _score = 0;
+        _hud.UpdateScore(_score);
+        _hud.ShowMessage("Get Ready");
         _player.Start(_startPosition.Position);
         _startTimer.Start();
     }
@@ -54,6 +59,7 @@ public class Main : Node
     private void OnScoreTimerTimeout()
     {
         _score++;
+        _hud.UpdateScore(_score);
     }
 
     private void OnMobTimerTimeout()
@@ -61,7 +67,8 @@ public class Main : Node
         var random = new Random();
         _mobSpawnLocation.SetOffset((float)random.NextDouble());
 
-        var mob = new Mob();
+        var mob = _mob.Instance() as Mob;
+
         AddChild(mob);
 
         var direction = _mobSpawnLocation.Rotation + Math.PI / 2;
@@ -71,5 +78,10 @@ public class Main : Node
         direction += random.Next((int)((-Math.PI / 4)*1000000d), (int)((Math.PI / 4) * 1000000d)) / 1000000f;
 
         mob.SetLinearVelocity(new Vector2(random.Next(mob.MinSpeed, mob.MaxSpeed), 0).Rotated((float)direction));
+    }
+
+    public void OnHudStartGame()
+    {
+        NewGame();
     }
 }
