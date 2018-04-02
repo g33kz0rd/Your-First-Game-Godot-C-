@@ -3,18 +3,17 @@ using Godot;
 
 public class Player : Area2D
 {
-    [Signal]
-    public delegate void Hit();
+    [Signal] public delegate void Hit();
 
-    [Export]
-    private int _speed = 400;
-    private Vector2 _screensize;
+    [Export] private int _speed = 400;
+
+    private Vector2 _screenSize;
     private AnimatedSprite _animatedSprite;
     private CollisionShape2D _collisionShape2D;
 
     public override void _Ready()
     {
-        _screensize = GetViewportRect().Size;
+        _screenSize = GetViewportRect().Size;
         _animatedSprite = GetNode("AnimatedSprite") as AnimatedSprite;
         _collisionShape2D = GetNode("CollisionShape2D") as CollisionShape2D;
 
@@ -53,8 +52,8 @@ public class Player : Area2D
         }
 
         var tempPosition = Position + velocity * delta;
-        tempPosition.x = Mathf.Clamp(tempPosition.x, 0, _screensize.x);
-        tempPosition.y = Mathf.Clamp(tempPosition.y, 0, _screensize.y);
+        tempPosition.x = Mathf.Clamp(tempPosition.x, 0, _screenSize.x);
+        tempPosition.y = Mathf.Clamp(tempPosition.y, 0, _screenSize.y);
         Position = tempPosition;
 
         if (velocity.x != 0)

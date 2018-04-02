@@ -1,12 +1,16 @@
 using Godot;
 using System;
 
-public class Mob : Area2D
+public class Mob : RigidBody2D
 {
     private string[] MobTypes = new string[] { "walk", "swim", "fly" };
 
     [Export] private int _minSpeed = 150;
+    public int MinSpeed => _minSpeed;
+
     [Export] private int _maxSpeed = 250;
+    public int MaxSpeed => _maxSpeed;
+
     private int _speed = 400;
 
     private Vector2 _screensize;
