@@ -72,7 +72,7 @@ public class Player : Area2D
     private void OnPlayerBodyEntered(Object body)
     {
         Hide();
-        EmitSignal("hit");
+        EmitSignal(nameof(Hit));
         _collisionShape2D.Disabled = true;
     }
 }
