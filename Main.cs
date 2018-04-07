@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public class Main : Node
 {
@@ -44,7 +45,7 @@ public class Main : Node
     private void NewGame()
     {
         _hud.UpdateScore(_score);
-        _hud.ShowMessage("Get Ready");
+        Task.Run(() => _hud.ShowMessage("Get Ready"));
         _player.Start(_startPosition.Position);
         _startTimer.Start();
     }
@@ -65,7 +66,9 @@ public class Main : Node
     private void OnMobTimerTimeout()
     {
         var random = new Random();
-        _mobSpawnLocation.SetOffset((float)random.NextDouble());
+		var offset = random.Next();
+        
+        _mobSpawnLocation.SetOffset(offset);
 
         var mob = _mob.Instance() as Mob;
 

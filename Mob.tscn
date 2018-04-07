@@ -3,10 +3,10 @@
 [ext_resource path="res://Mob.cs" type="Script" id=1]
 [ext_resource path="res://assets/art/enemyFlyingAlt_1.png" type="Texture" id=2]
 [ext_resource path="res://assets/art/enemyFlyingAlt_2.png" type="Texture" id=3]
-[ext_resource path="res://assets/art/enemySwimming_1.png" type="Texture" id=4]
-[ext_resource path="res://assets/art/enemySwimming_2.png" type="Texture" id=5]
-[ext_resource path="res://assets/art/enemyWalking_1.png" type="Texture" id=6]
-[ext_resource path="res://assets/art/enemyWalking_2.png" type="Texture" id=7]
+[ext_resource path="res://assets/art/enemyWalking_1.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/enemyWalking_2.png" type="Texture" id=5]
+[ext_resource path="res://assets/art/enemySwimming_1.png" type="Texture" id=6]
+[ext_resource path="res://assets/art/enemySwimming_2.png" type="Texture" id=7]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -18,33 +18,32 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
-"name": "swim",
+"name": "walk",
 "speed": 4.0
 }, {
 "frames": [ ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
-"name": "walk",
+"name": "swim",
 "speed": 4.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
 
 custom_solver_bias = 0.0
-radius = 42.1079
-height = 27.7414
+radius = 36.0936
+height = 11.7792
 
-[node name="Mob" type="RigidBody2D"]
+[node name="Mob" type="RigidBody2D" index="0"]
 
 position = Vector2( 265.336, 130.863 )
-scale = Vector2( 0.75, 0.75 )
 input_pickable = false
 collision_layer = 1
-collision_mask = 1
+collision_mask = 0
 mode = 0
 mass = 1.0
 friction = 1.0
 bounce = 0.0
-gravity_scale = 1.0
+gravity_scale = 0.0
 custom_integrator = false
 continuous_cd = 0
 contacts_reported = 0
@@ -56,14 +55,16 @@ linear_damp = -1.0
 angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Collision", "Transform" ]
 _minSpeed = 150
 _maxSpeed = 250
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
 
+scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 1 )
 animation = "fly"
+_sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 

@@ -38,6 +38,7 @@ public class Mob : RigidBody2D
 
     private void OnMobVisibilityChanged()
     {
-        QueueFree();
+        if(!Visible)
+            QueueFree();
     }
 }

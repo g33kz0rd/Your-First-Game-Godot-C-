@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Threading.Tasks;
 
 public class Hud : CanvasLayer
@@ -23,11 +24,19 @@ public class Hud : CanvasLayer
         _messageLabel.Text = message;
         _messageLabel.Show();
         _messageTimer.Start();
+
+        while (_messageLabel.Visible)
+            continue;
     }
 
     public void ShowGameOver()
     {
-        Task.Run(() => ShowMessage("Game Over")).Wait();        
+        Task.Run(() => GameOver());
+    }
+
+    private void GameOver()
+    {
+        Task.Run(() => ShowMessage("Game Over")).Wait(); 
 
         _startButton.Show();
 
